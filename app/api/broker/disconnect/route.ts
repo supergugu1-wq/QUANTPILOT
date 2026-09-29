@@ -1,0 +1,2 @@
+import {createClient} from '../../../../lib/supabase/server';import {admin} from '../../../../lib/supabase/admin';
+export async function POST(){const s=await createClient();const {data:{user}}=await s.auth.getUser();if(!user)return Response.json({error:'unauthorized'},{status:401});const db=admin();await db.from('bot_configs').update({enabled:false}).eq('user_id',user.id);await db.from('broker_connections').delete().eq('user_id',user.id).eq('provider','alpaca');return Response.json({ok:true})}

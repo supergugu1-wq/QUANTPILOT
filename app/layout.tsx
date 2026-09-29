@@ -1,0 +1,1 @@
+import './globals.css'; export const metadata={title:'QuantPilot | Paper Trading',description:'Painel educacional para Alpaca Paper Trading'}; export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body>{children}</body></html>}

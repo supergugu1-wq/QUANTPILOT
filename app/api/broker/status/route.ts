@@ -1,0 +1,2 @@
+import {createClient} from '../../../../lib/supabase/server';import {admin} from '../../../../lib/supabase/admin';
+export async function GET(){const s=await createClient();const {data:{user}}=await s.auth.getUser();if(!user)return Response.json({connected:false},{status:401});const {data}=await admin().from('broker_connections').select('provider,environment,broker_account_id,scope,updated_at').eq('user_id',user.id).eq('provider','alpaca').maybeSingle();return Response.json({connected:!!data,...(data||{})})}
